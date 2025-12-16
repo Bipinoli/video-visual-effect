@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video visual effect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <script type="module" src="dom.js"></script>
+    <script type="module" src="webgl.js"></script>
+    <script type="module" src="main.js"></script>
+
+    <!-- <canvas id="canvas"></canvas> -->
+
+    <div class="whole-container">
+      <div class="video-container">
+        <video autoplay loop muted>
+          <!-- Video by Doğan Alpaslan  Demir -->
+          <!-- https://www.pexels.com/video/adorable-small-dog-in-purple-harness-playing-indoors-35172441/ -->
+          <source src="https://www.pexels.com/download/video/35172441/" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="controls-container">
+        <div id="effect-btns">
+          <!-- <div class='btn effect-btn'>Glitch effect</div> -->
+        </div>
+        <div id="strength-controls">
+          <div class="strength-control">
+            <label for="effect-strength">Effect strength</label>
+            <input type="range" id="effect-strength" name="effect-strength" min="0" max="10" />
+          </div>
+        </div>
+        <div class="special-btns">
+          <div class="btn special-btn">
+            <i class="fa-solid fa-upload"></i>
+            <p>Upload video</p>
+          </div>
+          <div class="btn special-btn">
+            <i class="fa-solid fa-download"></i>
+            <p>Download with effect</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</body>
+</html>
