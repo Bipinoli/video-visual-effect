@@ -1,3 +1,4 @@
+let existingGL = null;
 let existingArrayBuffer = null;
 let existingTexture = null;
 let existingShader = {
@@ -8,11 +9,15 @@ let existingShader = {
 
 
 export async function setupWebGL(canvasElement, shaderPath) {
-  const gl = canvasElement.getContext("webgl"); 
-  if (!gl) {
-    alert("We apply visual effects via WebGL. Your browser currently doesn't support WebGL.");
-    return;
+  if (!existingGL) {
+    const gl = canvasElement.getContext("webgl"); 
+    if (!gl) {
+      alert("We apply visual effects via WebGL. Your browser currently doesn't support WebGL.");
+      return;
+    }
+    existingGL = gl;
   }
+  const gl = existingGL;
   if (existingShader.shaderProgram) {
     gl.deleteShader(existingShader.vertexShader);
     gl.deleteShader(existingShader.fragmentShader);
@@ -97,10 +102,27 @@ export async function setupWebGL(canvasElement, shaderPath) {
 }
 
 
+export function renderVideo(canvasElement, videoElement) {
+  if (!existingGL || !existingShader.shaderProgram) {
+    return;
+  }
+  function render(time) {
+    const gl = existingGL;
+    const timeLoc = gl.getUniformLocation(existingShader.shaderProgram, "u_time"); 
+    if (timeLoc) {
+      gl.uniform1f(timeLoc, time * 0.001); // ms -> s
+    }
+    updateTexture(canvasElement, videoElement);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+}
 
-export function updateTexture(canvasElement, videoElement) {
-  const gl = canvasElement.getContext("webgl"); 
-  if (gl) {
+
+
+function updateTexture(canvasElement, videoElement) {
+  if (existingGL) {
+    const gl = existingGL;
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, existingTexture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoElement);

@@ -1,11 +1,12 @@
-export function drawControls(state, effects) {
+export function drawControls(state, effects, clickCallback) {
   const parent = document.getElementById('effect-btns');
   parent.replaceChildren();
   effects.forEach(effect => {
     const btn = buildEffectBtn(effect, state);
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", async () => {
+      await clickCallback(effect);
       state = stateManager(state, effect);
-      drawControls(state, effects);
+      drawControls(state, effects, clickCallback);
     });
     parent.appendChild(btn);
   });  
