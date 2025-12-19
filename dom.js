@@ -5,6 +5,10 @@ export function drawUI(stateControls, statePreview, effects, clickCallback, down
   } else {
     document.getElementById("download-progress-indicator").style.display = "none";
   }
+  document.getElementById("effect-strength").addEventListener("input", () => {
+    const value = parseFloat(document.getElementById("effect-strength").value);
+    stateControls.effectStrength.strength = value;
+  });
   drawControls(stateControls, effects, clickCallback);
 }
 

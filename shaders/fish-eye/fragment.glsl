@@ -5,6 +5,7 @@ precision mediump float;
 varying vec2 v_uv;
 uniform sampler2D u_image;
 uniform float u_time;
+uniform float u_strength; // [0.0 - 1.0]
 
 void main() {
   // Normalize UV to [-1, 1]
@@ -13,7 +14,7 @@ void main() {
   float r = length(p);
 
   // Fisheye strength
-  float strength = 2.0; // 0.5 = mild, 1.5 = strong
+  float strength = 0.5 + 2.0 * u_strength;
 
   // Polar fisheye mapping
   float theta = atan(p.y, p.x);

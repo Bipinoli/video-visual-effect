@@ -4,14 +4,17 @@ import {setupWebGL, renderVideo} from "./webgl.js"
 const effects = [
   {id: "colinv", name: 'Color-invert', hasStrengthControl: false, folder: "color-invert"},
   {id: "anadis", name: 'Analog distortion', hasStrengthControl: true, folder: "analog-distortion"},
-  {id: "edgdet", name: 'Edge detect', hasStrengthControl: true, folder: "edge-detect"},
+  {id: "edgdet", name: 'Edge detect', hasStrengthControl: false, folder: "edge-detect"},
   {id: "fiseye", name: 'Fish eye', hasStrengthControl: true, folder: "fish-eye"},
   {id: "poster", name: 'Posterize', hasStrengthControl: true, folder: "posterize"},
   {id: "noeffc", name: 'No effect', hasStrengthControl: false, folder: "noeffect"},
 ];
 let stateControls = { 
-  selectedEffect: "noeffc", 
+  selectedEffect: "poster", 
   videoUrl: "./assets/doggo.mp4",
+  effectStrength: {
+    strength: 0.5 // using as object to pass by reference
+  },
   downloadInProgress: false,
 };
 let statePreview = {
@@ -54,7 +57,7 @@ function start() {
 
 async function effectClickCallback(effect) {
   await setupWebGL(statePreview.canvasElement, `shaders/${effect.folder}`);
-  renderVideo(statePreview.canvasElement, statePreview.videoElement);
+  renderVideo(stateControls.effectStrength, statePreview.canvasElement, statePreview.videoElement);
 }
 
 async function downloadBtnClickCallback() { 

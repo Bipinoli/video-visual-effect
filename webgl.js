@@ -102,15 +102,20 @@ export async function setupWebGL(canvasElement, shaderPath) {
 }
 
 
-export function renderVideo(canvasElement, videoElement) {
+export function renderVideo(effectStrength, canvasElement, videoElement) {
   if (!existingGL || !existingShader.shaderProgram) {
     return;
   }
   function render(time) {
     const gl = existingGL;
+    gl.useProgram(existingShader.shaderProgram);
     const timeLoc = gl.getUniformLocation(existingShader.shaderProgram, "u_time"); 
     if (timeLoc) {
       gl.uniform1f(timeLoc, time * 0.001); // ms -> s
+    }
+    const strengthLoc = gl.getUniformLocation(existingShader.shaderProgram, "u_strength"); 
+    if (strengthLoc) {
+      gl.uniform1f(strengthLoc, effectStrength.strength);
     }
     updateTexture(canvasElement, videoElement);
     requestAnimationFrame(render);
