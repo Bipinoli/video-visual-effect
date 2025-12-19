@@ -2,6 +2,10 @@
 
 [Try it online](https://bipinoli.github.io/video-visual-effect/)
 
+<a href="https://www.youtube.com/watch?v=qnzGsnhO5IQ">
+  <img src="https://img.youtube.com/vi/qnzGsnhO5IQ/maxresdefault.jpg" alt="Video Demo" width="700">
+</a>
+
 Upload any video, select visual effects, and fine-tune their intensity. Preview the result and download the processed video. All directly in your browser, with no data ever sent to a server.
 
 ## Disclaimer
