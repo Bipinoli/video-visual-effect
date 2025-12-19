@@ -13,10 +13,13 @@
     <script type="module" src="webgl.js"></script>
     <script type="module" src="main.js"></script>
 
-
     <div class="whole-container">
       <div class="video-container">
         <canvas id="canvas"></canvas>
+        <div id="download-progress-indicator">
+          <p>Please wait! Preparing video for downloading.</p>
+          <i class="fa-solid fa-circle-notch spin"></i>
+        </div>
       </div>
       <div class="controls-container">
         <div id="effect-btns">
@@ -33,7 +36,7 @@
             <i class="fa-solid fa-upload"></i>
             <p>Upload video</p>
           </div>
-          <div class="btn special-btn">
+          <div id="btn-download-with-effect" class="btn special-btn">
             <i class="fa-solid fa-download"></i>
             <p>Download with effect</p>
           </div>

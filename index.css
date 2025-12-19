@@ -13,6 +13,7 @@ body {
   gap: 1rem;
 }
 .video-container {
+  position: relative;
   width: 40vw;
   height: 80vh;
   display: flex;
@@ -43,7 +44,8 @@ body {
   user-select: none;
 }
 .selected-btn {
-  background-color: red;
+  background-color: #ff9800 !important;   /* bright contrasting color */
+  color: #1C1C1C !important;
 }
 #effect-btns {
   display: flex;
@@ -89,4 +91,29 @@ body {
 }
 .strength-control > input {
   flex: 1;
+}
+#download-progress-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  gap: 0.5rem;
+  border: 1px solid gray;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#download-progress-indicator > i {
+  font-size: larger;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
 }

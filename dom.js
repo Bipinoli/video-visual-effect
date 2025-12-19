@@ -1,4 +1,14 @@
-export function drawControls(state, effects, clickCallback) {
+export function drawUI(stateControls, statePreview, effects, clickCallback, downloadBtnClickCallback) {
+  document.getElementById("btn-download-with-effect").addEventListener("click", downloadBtnClickCallback);
+  if (stateControls.downloadInProgress) {
+    document.getElementById("download-progress-indicator").style.display = "flex";
+  } else {
+    document.getElementById("download-progress-indicator").style.display = "none";
+  }
+  drawControls(stateControls, effects, clickCallback);
+}
+
+function drawControls(state, effects, clickCallback) {
   const parent = document.getElementById('effect-btns');
   parent.replaceChildren();
   effects.forEach(effect => {
@@ -33,5 +43,5 @@ function buildEffectBtn(effect, state) {
 
 
 function stateManager(state, selectedEffect) {
-  return { selectedEffect: selectedEffect.id };
+  return { ...state, selectedEffect: selectedEffect.id };
 }
