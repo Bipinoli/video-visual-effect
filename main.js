@@ -10,7 +10,7 @@ const effects = [
   {id: "noeffc", name: 'No effect', hasStrengthControl: false, folder: "noeffect"},
 ];
 let stateControls = { 
-  selectedEffect: "poster", 
+  selectedEffect: "fiseye", 
   videoUrl: "./assets/doggo.mp4",
   effectStrength: {
     strength: 0.5 // using as object to pass by reference
@@ -19,7 +19,7 @@ let stateControls = {
 };
 let statePreview = {
   canvasElement: document.getElementById("canvas"),
-  videoElement: createVideoForLivePreview(stateControls.videoUrl)
+  videoElement: undefined, 
 };
 
 
@@ -48,8 +48,8 @@ function createVideo(url, relatedCanvasElement) {
 
 
 function start() {
-  const video = createVideo();
-  drawUI(stateControls, statePreview, effects, effectClickCallback, downloadBtnClickCallback);
+  statePreview.videoElement = createVideoForLivePreview(stateControls.videoUrl);
+  drawUI(stateControls, statePreview, effects, effectClickCallback, downloadBtnClickCallback, uploadVideoCallback);
   const selectedEffect = effects.find(e => e.id == stateControls.selectedEffect);
   effectClickCallback(selectedEffect);
 }
@@ -62,7 +62,7 @@ async function effectClickCallback(effect) {
 
 async function downloadBtnClickCallback() { 
   stateControls.downloadInProgress = true;
-  drawUI(stateControls, statePreview, effects, effectClickCallback, downloadBtnClickCallback);
+  drawUI(stateControls, statePreview, effects, effectClickCallback, downloadBtnClickCallback, uploadVideoCallback);
 
   statePreview.videoElement.pause();
   statePreview.videoElement.currentTime = 0;
@@ -97,6 +97,13 @@ async function downloadBtnClickCallback() {
   mediaRecorder.start();
   statePreview.videoElement.play();
 }
+
+
+
+function uploadVideoCallback() {
+  start();
+}
+
 
 
 function getSupportedMimeType() {
