@@ -40,7 +40,7 @@ export async function setupWebGL(canvasElement, shaderPath) {
   gl.linkProgram(shaderProgram);
   if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
     console.error(`Error! failed to link shader programs. ${gl.getProgramInfoLog(shaderProgram)}`);
-    gl.deleteshader(vertShader);
+    gl.deleteShader(vertShader);
     gl.deleteShader(fragShader);
     gl.deleteProgram(shaderProgram);
     return;
