@@ -1,6 +1,6 @@
 # Visual effects to video
 
-[Try it online](https://bipinoli.github.io/video-visual-effect/)
+[Try it online](https://bipinoli.github.io/video-VFX/)
 
 <a href="https://www.youtube.com/watch?v=qnzGsnhO5IQ">
   <img src="https://img.youtube.com/vi/qnzGsnhO5IQ/maxresdefault.jpg" alt="Video Demo" width="700">
